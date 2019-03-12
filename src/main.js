@@ -1,10 +1,13 @@
 import Vue from 'vue'
 require('./components/_globals') // importing all the components
 require('../public/css/main.css')
+require('./libs/fontAwesome')
 import App from './App.vue'
 import store from './store/index'
 import router from './routes'
 import './registerServiceWorker'
+
+
 
 Vue.config.productionTip = true
 

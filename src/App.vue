@@ -1,11 +1,12 @@
 <template>
+
   <div id="app" class="container mx-auto">
     <router-view :key='$router.path'/>
   </div>
 </template>
 
-<script>
 
+<script>
 export default {
   name: 'app',
 }

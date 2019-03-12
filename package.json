@@ -9,6 +9,9 @@
     "serve:bs": "vue-cli-service serve:bs"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.15",
+    "@fortawesome/free-solid-svg-icons": "^5.7.2",
+    "@fortawesome/vue-fontawesome": "^0.1.5",
     "moment": "^2.24.0",
     "random-words": "^1.1.0",
     "register-service-worker": "^1.5.2",

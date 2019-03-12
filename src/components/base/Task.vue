@@ -31,7 +31,7 @@
                     @blur="doneEdit"
                     @abort="doneEdit"
                     autofocus
-                    >
+                >
             </div>
             <div class="flex phone:flex-col">
                 <div class="flex">
@@ -54,8 +54,8 @@
                         </button>
                     </div>
                     <div class="px-1">
-                        <button class="p-4 px-8 bg-grey-darkest hover:bg-grey-dark text-white font-bold uppercase rounded text-xl" @click="restartTimer" :disabled="start">
-                            Restart
+                        <button class="p-4 px-8 bg-grey-darkest hover:bg-grey-dark text-white font-bold uppercase rounded text-xl" @click="restartTimer" :disabled="start" title="Restart Timer">
+                            <font-awesome-icon icon="sync-alt" />
                         </button>
                     </div>
                 </div>
@@ -83,8 +83,15 @@ import moment from 'moment'
             }
         },
         methods: {
-            titleEdit() { this.editTitle = true },
-            descriptionEdit () { this.editDescription = true },
+            titleEdit() { 
+                this.editTitle = true 
+                this.editDescription = false
+            },
+            
+            descriptionEdit () { 
+                this.editDescription = true
+                this.editTitle = false
+            },
 
             doneEdit() {
                 this.editTitle = false

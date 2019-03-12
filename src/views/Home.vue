@@ -18,7 +18,7 @@
                             :name="task.name"
                             :description="task.description"
                             @remove="removeTask($event)"
-                        ></task>
+                        />
                     </section>
                 </article>
             </div>
@@ -50,8 +50,14 @@ import randomWords from 'random-words'
                     id: this.tasks.length + 1
                 })
             },
-            removeTask(task) {
-                this.tasks.splice(this.tasks.indexOf(task), 1)
+            removeTask(removeTask) {
+                this.tasks = this.tasks.filter((task) => task.name != removeTask.name)
+                if (this.tasks.length < 1)
+                    this.tasks.push({ 
+                        name: randomWords({ exactly: 1, wordsPerString: 2, join: ' ' }), 
+                        description: randomWords({ exactly: 5, join: ' ' }), 
+                        id: 1 
+                    })
             }
         }
     }
