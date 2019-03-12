@@ -1,6 +1,6 @@
 <template>
     <div class="w-full">
-        <card class="my-4" color="grey-lighter" text="black" rounded="">
+        <card class="my-4" color="grey-lighter" text="black" rounded>
             <div class="float-right relative">
                 <button 
                     class="text-red-light text-xl rounded-full p-2 px-3 font-bold"
@@ -9,10 +9,30 @@
                     x
                 </button>
             </div>
-            <h2 @dblclick="editTitle" class="cursor-pointer uppercase">
+            <h2 @dblclick="titleEdit" class="cursor-pointer uppercase" v-if="!editTitle">
                 {{ name }}
             </h2>
-            <small class="capitalize">{{ description }}</small>
+            <div v-else>
+                <input type="text" class="uppercase text-2xl font-bold p-4" 
+                    v-model="name" 
+                    @keyup.enter="doneEdit"
+                    @blur="doneEdit"
+                    @abort="doneEdit"
+                    autofocus
+                    >
+            </div>
+            <small @dblclick="descriptionEdit" class="capitalize cursor-pointer" v-if="!editDescription">
+                {{ description }}
+            </small>
+            <div v-else>
+                <input type="text" class="uppercase text-xs font-hairline p-4 w-full" 
+                    v-model="description" 
+                    @keyup.enter="doneEdit"
+                    @blur="doneEdit"
+                    @abort="doneEdit"
+                    autofocus
+                    >
+            </div>
             <div class="flex phone:flex-col">
                 <div class="flex">
                     <span class="text-5xl font-bold">{{ timeElapsed }}</span>
@@ -33,6 +53,11 @@
                             Stop
                         </button>
                     </div>
+                    <div class="px-1">
+                        <button class="p-4 px-8 bg-grey-darkest hover:bg-grey-dark text-white font-bold uppercase rounded text-xl" @click="restartTimer">
+                            Restart
+                        </button>
+                    </div>
                 </div>
             </div>
         </card>
@@ -51,12 +76,23 @@ import moment from 'moment'
             return {
                 timeStarted: 0,
                 start: false,
-                interval: null
+                interval: null,
+                editTitle: false,
+                editDescription: false,
             }
         },
         methods: {
-            editTitle() {
-                this.name = "Edit Task Name"
+            titleEdit() { this.editTitle = true },
+            descriptionEdit () { this.editDescription = true },
+
+            doneEdit() {
+                this.editTitle = false
+                this.editDescription = false
+                if (this.name == null || this.name == '')
+                    this.name = "Task title"
+                if (this.description == null || this.description === '')
+                    this.description = "Task description"
+
             },
 
             startTimer () {
@@ -69,8 +105,12 @@ import moment from 'moment'
                 clearInterval(this.interval)
             },
 
-            remove(event) {
-                // this.$emit('remove', event)
+            restartTimer () {
+                this.timeStarted = 0
+            },  
+
+            remove() {
+                
             }
         },
 
