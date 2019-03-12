@@ -54,7 +54,7 @@
                         </button>
                     </div>
                     <div class="px-1">
-                        <button class="p-4 px-8 bg-grey-darkest hover:bg-grey-dark text-white font-bold uppercase rounded text-xl" @click="restartTimer">
+                        <button class="p-4 px-8 bg-grey-darkest hover:bg-grey-dark text-white font-bold uppercase rounded text-xl" @click="restartTimer" :disabled="start">
                             Restart
                         </button>
                     </div>
@@ -71,6 +71,7 @@ import moment from 'moment'
         props: {
             name: { type: String, required: true },
             description: { type: String },
+            id: { type: String },
         },
         data() {
             return {
@@ -110,7 +111,7 @@ import moment from 'moment'
             },  
 
             remove() {
-                
+                this.$emit('remove', this)
             }
         },
 

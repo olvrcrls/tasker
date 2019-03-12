@@ -17,7 +17,7 @@
                         <task v-for="task in tasks" :key="task.id" 
                             :name="task.name"
                             :description="task.description"
-                            @remove="removeTask"
+                            @remove="removeTask($event)"
                         ></task>
                     </section>
                 </article>
@@ -50,8 +50,8 @@ import randomWords from 'random-words'
                     id: this.tasks.length + 1
                 })
             },
-            removeTask() {
-                this.$on('removeTask', alert(event))
+            removeTask(task) {
+                this.tasks.splice(this.tasks.indexOf(task), 1)
             }
         }
     }
